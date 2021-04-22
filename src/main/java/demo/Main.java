@@ -53,10 +53,26 @@ public class Main {
 
         String jsonToo = "{\"data\":{\"foo\":true},\"id\":\"9457d4cc-0842-402c-ac38-fc2c2c65f72e\",\"source\":\"ab/c/d\",\"type\":\"e1\",\"subject\":null,\"time\":{\"offset\":{\"totalSeconds\":-25200,\"id\":\"-07:00\",\"rules\":{\"transitions\":[],\"transitionRules\":[],\"fixedOffset\":true}},\"month\":\"APRIL\",\"dayOfWeek\":\"WEDNESDAY\",\"dayOfYear\":111,\"year\":2021,\"monthValue\":4,\"dayOfMonth\":21,\"hour\":15,\"minute\":16,\"second\":15,\"nano\":629956000},\"specVersion\":\"V1\",\"dataContentType\":\"application/json\",\"dataSchema\":null,\"extensionNames\":[],\"attributeNames\":[\"datacontenttype\",\"specversion\",\"id\",\"source\",\"time\",\"type\"]}";
 
-        HashMap bar = new ObjectMapper().readValue(jsonToo, HashMap.class);
+        String ce = "{" +
+                "    \"specversion\" : \"1.0\"," +
+                "    \"type\" : \"com.github.pull_request.opened\"," +
+                "    \"source\" : \"https://github.com/cloudevents/spec/pull\"," +
+                "    \"subject\" : \"123\"," +
+                "    \"id\" : \"A234-1234-1234\"," +
+                "    \"time\" : \"2018-04-05T17:31:00Z\"," +
+                "    \"comexampleextension1\" : \"value\"," +
+                "    \"comexampleothervalue\" : 5," +
+                "    \"datacontenttype\" : \"text/xml\"," +
+                "    \"data\" : \"<much wow=\\\"xml\\\"/>\"" +
+                "}";
+
+        HashMap bar = new ObjectMapper().readValue(ce, HashMap.class);
         System.out.println(bar);
         System.out.println(bar.get("type"));
         System.out.println(bar.get("data"));
+
+        String tooJson = mapper.writeValueAsString(ce);
+        System.out.println(tooJson);
     }
 
 
